@@ -1,0 +1,167 @@
+_wandb:
+    value:
+        cli_version: 0.19.0
+        m: []
+        python_version: 3.10.16
+        t:
+            "1":
+                - 1
+                - 5
+                - 41
+                - 53
+                - 55
+            "2":
+                - 1
+                - 5
+                - 41
+                - 53
+                - 55
+            "3":
+                - 1
+                - 13
+                - 16
+                - 19
+                - 23
+                - 55
+            "4": 3.10.16
+            "5": 0.19.0
+            "8":
+                - 5
+            "12": 0.19.0
+            "13": linux-x86_64
+NN:
+    value:
+        backbone: resnet50
+        dec_layers: 6
+        dilation: true
+        dim_feedforward: 2048
+        dropout: 0.1
+        enc_layers: 6
+        frozen_weights: null
+        hidden_dim: 256
+        in_channel: 3
+        loss:
+            aux_loss: false
+            eos_coef: 0.1
+            epoch_with_order_matching: 0
+            lepoch: 0
+            loss_components:
+                - shape
+                - loop
+                - rotation
+                - translation
+            loss_weight_dict:
+                edge_loss_weight: 1
+                loop_loss_weight: 1
+                rotation_loss_weight: 1
+                translation_loss_weight: 1
+            order_by: shape_translation
+            panel_order_inariant_loss: false
+            panel_origin_invariant_loss: false
+            quality_components:
+                - shape
+                - discrete
+                - rotation
+                - translation
+            stitches: ce
+        masks: null
+        max_num_edges: 56
+        model: GarmentDETRv6
+        nheads: 8
+        num_queries: 25
+        position_embedding: sine
+        pre-trained: null
+        pre_norm: true
+        step-trained: null
+data_split:
+    value:
+        filename: ./assets/data_configs/data_split.json
+        random_seed: 1738677676
+        size_test: 109104
+        size_train: 6096
+        size_valid: 6048
+        split_on: folder
+        test_per_type: 90
+        type: percent
+        valid_per_type: 5
+dataset:
+    value:
+        augment: true
+        balanced_batch_sampling: false
+        class: GarmentDetrDataset
+        element_size: 4
+        filter_by_params: ./assets/data_configs/param_filter.json
+        img_size: 1024
+        max_num_stitches: 28
+        max_panel_len: 14
+        max_pattern_len: 23
+        max_stitch_edges: 56
+        obj_filetag: ""
+        panel_classification: ./assets/data_configs/panel_classes_condenced.json
+        rotation_size: 4
+        size: 121248
+        standardize:
+            gt_scale:
+                outlines:
+                    - 26.674109
+                    - 29.560705
+                    - 1
+                    - 1
+                rotations:
+                    - 1.3826834
+                    - 1.9238795
+                    - 1.2877939
+                    - 1
+                stitch_tags:
+                    - 119.964195
+                    - 109.62911
+                    - 105.657364
+                translations:
+                    - 109.58753
+                    - 51.449017
+                    - 37.846794
+            gt_shift:
+                outlines:
+                    - 0
+                    - 0
+                    - 0
+                    - 0
+                rotations:
+                    - -0.38268343
+                    - -0.9238795
+                    - -1
+                    - 0
+                stitch_tags:
+                    - -59.99474
+                    - -78.23346
+                    - -52.926674
+                translations:
+                    - -55.25636
+                    - -20.001333
+                    - -17.086796
+        translation_size: 3
+        use_sim: true
+        use_smpl_loss: true
+        wrapper: RealisticDatasetDetrWrapper
+trainer:
+    value:
+        batch_size: 64
+        clip_max_norm: 0.1
+        devices:
+            - 0
+        dry_run: false
+        early_stopping:
+            patience: 50
+            window: 0.0001
+        epochs: 40
+        lr: 0.0002
+        lr_backbone: "1e-5"
+        lr_drop: 200
+        lr_scheduling: warm_cosine
+        multiprocess: true
+        optimizer: AdamW
+        random_seed: 1
+        return_stitches: true
+        weight_decay: "1e-4"
+        with_visualization: true
+        without_matcher: true

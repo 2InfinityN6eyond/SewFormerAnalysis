@@ -1,0 +1,8 @@
+{"time":"2025-02-04T23:03:09.816026177+09:00","level":"INFO","msg":"using version","core version":"0.19.0"}
+{"time":"2025-02-04T23:03:09.816042527+09:00","level":"INFO","msg":"created symlink","path":"/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/wandb/run-20250204_230309-am3v8jo3/logs/debug-core.log"}
+{"time":"2025-02-04T23:03:09.923991654+09:00","level":"INFO","msg":"created new stream","id":"am3v8jo3"}
+{"time":"2025-02-04T23:03:09.924029185+09:00","level":"INFO","msg":"stream: started","id":"am3v8jo3"}
+{"time":"2025-02-04T23:03:09.924065764+09:00","level":"INFO","msg":"writer: Do: started","stream_id":"am3v8jo3"}
+{"time":"2025-02-04T23:03:09.924090561+09:00","level":"INFO","msg":"sender: started","stream_id":"am3v8jo3"}
+{"time":"2025-02-04T23:03:09.924114496+09:00","level":"INFO","msg":"handler: started","stream_id":"am3v8jo3"}
+{"time":"2025-02-04T23:03:10.761641637+09:00","level":"INFO","msg":"Starting system monitor"}

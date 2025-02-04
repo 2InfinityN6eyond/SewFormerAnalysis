@@ -1,0 +1,16 @@
+{"time":"2025-02-04T23:01:23.954042219+09:00","level":"INFO","msg":"using version","core version":"0.19.0"}
+{"time":"2025-02-04T23:01:23.954064521+09:00","level":"INFO","msg":"created symlink","path":"/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/wandb/run-20250204_230123-gk4sxxcj/logs/debug-core.log"}
+{"time":"2025-02-04T23:01:24.064822258+09:00","level":"INFO","msg":"created new stream","id":"gk4sxxcj"}
+{"time":"2025-02-04T23:01:24.064867734+09:00","level":"INFO","msg":"stream: started","id":"gk4sxxcj"}
+{"time":"2025-02-04T23:01:24.064932356+09:00","level":"INFO","msg":"handler: started","stream_id":"gk4sxxcj"}
+{"time":"2025-02-04T23:01:24.065210712+09:00","level":"INFO","msg":"sender: started","stream_id":"gk4sxxcj"}
+{"time":"2025-02-04T23:01:24.065227614+09:00","level":"INFO","msg":"writer: Do: started","stream_id":"gk4sxxcj"}
+{"time":"2025-02-04T23:01:24.633990097+09:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-02-04T23:01:57.811842985+09:00","level":"INFO","msg":"stream: closing","id":"gk4sxxcj"}
+{"time":"2025-02-04T23:01:57.811881167+09:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-02-04T23:01:57.812594535+09:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-02-04T23:01:58.824200689+09:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-02-04T23:01:59.115212595+09:00","level":"INFO","msg":"handler: closed","stream_id":"gk4sxxcj"}
+{"time":"2025-02-04T23:01:59.115265505+09:00","level":"INFO","msg":"sender: closed","stream_id":"gk4sxxcj"}
+{"time":"2025-02-04T23:01:59.115261417+09:00","level":"INFO","msg":"writer: Close: closed","stream_id":"gk4sxxcj"}
+{"time":"2025-02-04T23:01:59.115730925+09:00","level":"INFO","msg":"stream: closed","id":"gk4sxxcj"}

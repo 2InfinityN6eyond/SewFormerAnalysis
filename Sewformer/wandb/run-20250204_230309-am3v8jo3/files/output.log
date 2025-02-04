@@ -1,0 +1,46 @@
+ExperimentWrappper::WARNING::Running wandb in Anonymous Mode. Your temporary account is: iwantmynewsletter-korea-university
+/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/wandb/run-20250204_230309-am3v8jo3/files
+/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/wandb/run-20250204_230309-am3v8jo3/files
+TrainerDetr::NN training Using device: 0
+epoch: 00, batch: 0009, loss: 7.517087, lr: 0.000025
+epoch: 00, batch: 0019, loss: 5.040088, lr: 0.000026
+epoch: 00, batch: 0029, loss: 4.383468, lr: 0.000026
+epoch: 00, batch: 0039, loss: 3.593648, lr: 0.000027
+epoch: 00, batch: 0049, loss: 3.660566, lr: 0.000027
+epoch: 00, batch: 0059, loss: 3.534907, lr: 0.000028
+epoch: 00, batch: 0069, loss: 4.302729, lr: 0.000028
+epoch: 00, batch: 0079, loss: 3.792096, lr: 0.000029
+epoch: 00, batch: 0089, loss: 3.198442, lr: 0.000029
+epoch: 00, batch: 0099, loss: 3.851949, lr: 0.000030
+epoch: 00, batch: 0109, loss: 3.138391, lr: 0.000030
+epoch: 00, batch: 0119, loss: 3.375354, lr: 0.000031
+epoch: 00, batch: 0129, loss: 3.211970, lr: 0.000031
+epoch: 00, batch: 0139, loss: 3.176896, lr: 0.000031
+epoch: 00, batch: 0149, loss: 2.996837, lr: 0.000032
+epoch: 00, batch: 0159, loss: 3.305967, lr: 0.000032
+epoch: 00, batch: 0169, loss: 3.640467, lr: 0.000033
+epoch: 00, batch: 0179, loss: 2.852284, lr: 0.000033
+epoch: 00, batch: 0189, loss: 2.461067, lr: 0.000034
+epoch: 00, batch: 0199, loss: 2.508043, lr: 0.000034
+epoch: 00, batch: 0209, loss: 2.503079, lr: 0.000035
+epoch: 00, batch: 0219, loss: 1.917476, lr: 0.000035
+epoch: 00, batch: 0229, loss: 2.188385, lr: 0.000036
+epoch: 00, batch: 0239, loss: 2.367533, lr: 0.000036
+epoch: 00, batch: 0249, loss: 1.832283, lr: 0.000036
+epoch: 00, batch: 0259, loss: 2.563210, lr: 0.000037
+epoch: 00, batch: 0269, loss: 2.300785, lr: 0.000037
+epoch: 00, batch: 0279, loss: 1.809039, lr: 0.000038
+epoch: 00, batch: 0289, loss: 2.031503, lr: 0.000038
+epoch: 00, batch: 0299, loss: 1.873646, lr: 0.000039
+epoch: 00, batch: 0309, loss: 2.128051, lr: 0.000039
+epoch: 00, batch: 0319, loss: 2.067585, lr: 0.000040
+epoch: 00, batch: 0329, loss: 1.727600, lr: 0.000040
+epoch: 00, batch: 0339, loss: 2.363968, lr: 0.000041
+epoch: 00, batch: 0349, loss: 1.750044, lr: 0.000041
+epoch: 00, batch: 0359, loss: 1.700078, lr: 0.000042
+epoch: 00, batch: 0369, loss: 2.395857, lr: 0.000042
+epoch: 00, batch: 0379, loss: 1.481380, lr: 0.000042
+epoch: 00, batch: 0389, loss: 2.222273, lr: 0.000043
+epoch: 00, batch: 0399, loss: 1.725950, lr: 0.000043
+epoch: 00, batch: 0409, loss: 2.089900, lr: 0.000044
+epoch: 00, batch: 0419, loss: 1.811725, lr: 0.000044
