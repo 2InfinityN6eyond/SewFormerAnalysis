@@ -223,7 +223,13 @@ class RealisticDatasetDetrWrapper(object):
                     _, _, datanames = self.dataset.get_item_infos(idx)
                     data_lists[name].append(datanames)
 
-            save_path = f"./data_configs/data_split.json"
+
+            # print("="*100)
+            # print(os.getcwd())
+            # print(os.listdir(os.getcwd()))
+            # print("="*100)
+
+            save_path = f"./assets/data_configs/data_split.json"
             json.dump(data_lists, open(save_path, "w"), indent=2)
             split_info['filename'] = save_path
 
