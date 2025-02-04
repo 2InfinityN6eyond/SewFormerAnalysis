@@ -1,0 +1,65 @@
+{
+  "os": "Linux-6.8.0-52-generic-x86_64-with-glibc2.35",
+  "python": "CPython 3.10.16",
+  "startedAt": "2025-02-04T14:03:09.814867Z",
+  "args": [
+    "-c",
+    "configs/train.yaml"
+  ],
+  "program": "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/train.py",
+  "codePath": "Sewformer/train.py",
+  "git": {
+    "remote": "https://github.com/2InfinityN6eyond/SewFormerAnalysis.git",
+    "commit": "42c496c5ddae18a53e05aa260eb1196ec81d40e5"
+  },
+  "email": "iwantmynewsletter@gmail.com",
+  "root": "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer",
+  "host": "server",
+  "username": "hjp",
+  "executable": "/home/hjp/anaconda3/envs/SewFormer/bin/python",
+  "codePathLocal": "train.py",
+  "cpu_count": 64,
+  "cpu_count_logical": 128,
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "gpu_count": 4,
+  "disk": {
+    "/": {
+      "total": "1967317549056",
+      "used": "731561590784"
+    }
+  },
+  "memory": {
+    "total": "405326934016"
+  },
+  "cpu": {
+    "count": 64,
+    "countLogical": 128
+  },
+  "gpu_nvidia": [
+    {
+      "name": "NVIDIA GeForce RTX 4090",
+      "memoryTotal": "25757220864",
+      "cudaCores": 16384,
+      "architecture": "Ada"
+    },
+    {
+      "name": "NVIDIA GeForce RTX 4090",
+      "memoryTotal": "25757220864",
+      "cudaCores": 16384,
+      "architecture": "Ada"
+    },
+    {
+      "name": "NVIDIA GeForce RTX 4090",
+      "memoryTotal": "25757220864",
+      "cudaCores": 16384,
+      "architecture": "Ada"
+    },
+    {
+      "name": "NVIDIA GeForce RTX 4090",
+      "memoryTotal": "25757220864",
+      "cudaCores": 16384,
+      "architecture": "Ada"
+    }
+  ],
+  "cudaVersion": "12.2"
+}

@@ -1,0 +1,100 @@
+ExperimentWrappper::WARNING::Running wandb in Anonymous Mode. Your temporary account is: iwantmynewsletter-korea-university
+/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/wandb/run-20250204_230123-gk4sxxcj/files
+/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/wandb/run-20250204_230123-gk4sxxcj/files
+TrainerDetr::NN training Using device: 0
+Traceback (most recent call last):
+  File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/train.py", line 110, in <module>
+    trainer.fit(model, model_without_ddp, criterion, rank, config)
+  File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/trainer.py", line 405, in fit
+    self._fit_loop_without_matcher(model, criterion, self.datawraper.loaders.train, self.datawraper.loaders.validation, start_epoch=start_epoch)
+  File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/trainer.py", line 430, in _fit_loop_without_matcher
+    outputs = model(images,
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+    return inner()
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in inner
+    result = forward_call(*args, **kwargs)
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 1643, in forward
+    else self._run_ddp_forward(*inputs, **kwargs)
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 1459, in _run_ddp_forward
+    return self.module(*inputs, **kwargs)  # type: ignore[index]
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/models/garment_detr_2d.py", line 100, in forward
+    edge_hs = self.edge_trans_decoder(tgt, memory,
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/models/transformer.py", line 106, in forward
+    output = layer(output, memory, tgt_mask=tgt_mask,
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/models/transformer.py", line 267, in forward
+    return self.forward_pre(tgt, memory, tgt_mask, memory_mask,
+  File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/models/transformer.py", line 248, in forward_pre
+    tgt2 = self.multihead_attn(query=self.with_pos_embed(tgt2, query_pos),
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/activation.py", line 1368, in forward
+    attn_output, attn_output_weights = F.multi_head_attention_forward(
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/functional.py", line 6097, in multi_head_attention_forward
+    q, k, v = _in_projection_packed(query, key, value, in_proj_weight, in_proj_bias)
+  File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/functional.py", line 5526, in _in_projection_packed
+    .contiguous()
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 72.00 MiB. GPU 0 has a total capacity of 23.65 GiB of which 47.56 MiB is free. Including non-PyTorch memory, this process has 23.59 GiB memory in use. Of the allocated memory 22.89 GiB is allocated by PyTorch, and 116.27 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/train.py", line 110, in <module>
+[rank0]:     trainer.fit(model, model_without_ddp, criterion, rank, config)
+[rank0]:   File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/trainer.py", line 405, in fit
+[rank0]:     self._fit_loop_without_matcher(model, criterion, self.datawraper.loaders.train, self.datawraper.loaders.validation, start_epoch=start_epoch)
+[rank0]:   File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/trainer.py", line 430, in _fit_loop_without_matcher
+[rank0]:     outputs = model(images,
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1844, in _call_impl
+[rank0]:     return inner()
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1790, in inner
+[rank0]:     result = forward_call(*args, **kwargs)
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 1643, in forward
+[rank0]:     else self._run_ddp_forward(*inputs, **kwargs)
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/parallel/distributed.py", line 1459, in _run_ddp_forward
+[rank0]:     return self.module(*inputs, **kwargs)  # type: ignore[index]
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:   File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/models/garment_detr_2d.py", line 100, in forward
+[rank0]:     edge_hs = self.edge_trans_decoder(tgt, memory,
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:   File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/models/transformer.py", line 106, in forward
+[rank0]:     output = layer(output, memory, tgt_mask=tgt_mask,
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:   File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/models/transformer.py", line 267, in forward
+[rank0]:     return self.forward_pre(tgt, memory, tgt_mask, memory_mask,
+[rank0]:   File "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis/Sewformer/models/transformer.py", line 248, in forward_pre
+[rank0]:     tgt2 = self.multihead_attn(query=self.with_pos_embed(tgt2, query_pos),
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/modules/activation.py", line 1368, in forward
+[rank0]:     attn_output, attn_output_weights = F.multi_head_attention_forward(
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/functional.py", line 6097, in multi_head_attention_forward
+[rank0]:     q, k, v = _in_projection_packed(query, key, value, in_proj_weight, in_proj_bias)
+[rank0]:   File "/home/hjp/anaconda3/envs/SewFormer/lib/python3.10/site-packages/torch/nn/functional.py", line 5526, in _in_projection_packed
+[rank0]:     .contiguous()
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 72.00 MiB. GPU 0 has a total capacity of 23.65 GiB of which 47.56 MiB is free. Including non-PyTorch memory, this process has 23.59 GiB memory in use. Of the allocated memory 22.89 GiB is allocated by PyTorch, and 116.27 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

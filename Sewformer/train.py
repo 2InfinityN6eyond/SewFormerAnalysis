@@ -53,16 +53,14 @@ if __name__ == '__main__':
     np.set_printoptions(precision=4, suppress=True)
     # import pdb; pdb.set_trace()
     config, args = get_values_from_args()
-    system_info = customconfig.Properties('./system.json')
-
-
-
     
+    # system_info = customconfig.Properties('./system.json')
+    
+    from env_constants import SEWFORMER_PROJ_ROOT, DATASET_ROOT, WANDB_USERNAME
+
     print("CONFIG :")
     pprint(config)
-    print("SYSTEM INFO :")
-    pprint(system_info.properties)
-
+    
 
     # DDP
     dist.init_process_group(backend='nccl')
@@ -72,12 +70,17 @@ if __name__ == '__main__':
 
     experiment = ExperimentWrappper(
         config,  # set run id in cofig to resume unfinished run!
-        system_info['wandb_username'],
-        no_sync=False) 
+        WANDB_USERNAME,
+        no_sync=False)
     
     # Dataset Class
     data_class = getattr(data, config['dataset']['class'])
-    dataset = data_class(system_info['datasets_path'], system_info["sim_root"], config['dataset'], gt_caching=True, feature_caching=False)
+    dataset = data_class(
+        root_dir=os.path.join(DATASET_ROOT, "sewfactory"),
+        sim_root=os.path.join(DATASET_ROOT, "simimages"),
+        start_config=config['dataset'],
+        gt_caching=True, feature_caching=False
+    )
 
     trainer = TrainerDetr(
             config['trainer'], experiment, dataset, config['data_split'], 
@@ -106,8 +109,13 @@ if __name__ == '__main__':
     if not args.test_only:    
         trainer.fit(model, model_without_ddp, criterion, rank, config)
     else:
-        config["loss"]["lepoch"] = -1
+        # config["loss"]["lepoch"] = -1
+        # [HJP] I think it should be ["NN"]["loss"]["lepoch"]
+        config["NN"]["loss"]["lepoch"] = -1
         if config["NN"]["pre-trained"] is None or not os.path.exists(config["NN"]["pre-trained"]):
+            print(config["NN"]["pre-trained"])
+            print(os.path.exists(config["NN"]["pre-trained"]))
+            
             print("Train::Error:Pre-trained model should be set for test only mode")
             raise ValueError("Pre-trained model should be set for test")
 

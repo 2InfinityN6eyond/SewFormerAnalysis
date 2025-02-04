@@ -8,6 +8,7 @@ experiment:
   run_name: Detr2d-V6-final-dif-ce-focal-schd-agp
   run_id: 
   local_dir: ./garment_outputs/Detr2d-V6-final-dif-ce-focal-schd-agp
+  is_training: False
 
 # ----- Dataset-related properties -----
 dataset:
@@ -47,7 +48,11 @@ dataset:
       translations: [-55.25636 , -20.001333, -17.086796]
 
 data_split:
-  
+  type: percent
+  split_on: folder
+  valid_per_type: 5
+  test_per_type: 90
+
 
 
 # ----- Network Architecture --------
@@ -98,7 +103,7 @@ NN:
 # ------- Trainer -----
 trainer: 
   dry_run: False
-  batch_size: 64
+  batch_size: 32
   devices: [0]
   without_matcher: true
   epochs: 40
@@ -115,3 +120,4 @@ trainer:
     patience: 50
   with_visualization: True  # Log visualizations of predicted sewing patterns
   return_stitches: false
+
