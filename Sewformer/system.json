@@ -1,0 +1,6 @@
+{
+  "output": "path to put the training logs",
+  "datasets_path": "/data/hjp/VTO2025/DATASETs/sewfactory/sewfactory",
+  "sim_root": "/data/hjp/VTO2025/DATASETs/sewfactory/simimages",
+  "wandb_username": ""
+}  
