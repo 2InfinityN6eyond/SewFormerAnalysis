@@ -19,23 +19,16 @@ import os,sys
 currentdir = os.path.dirname(os.path.realpath(__file__))
 parentdir = os.path.dirname(currentdir)
 
-# print(currentdir)
-# print(parentdir)
+print("CURRENT DIR : ", currentdir)
+print("PARENT DIR : ", parentdir)
 
 sys.path.insert(0, parentdir)
 
-
-# root_path = os.path.dirname(os.path.dirname(os.path.abspath(parentdir)))
-root_path = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-root_path = os.path.dirname(os.path.dirname(os.path.abspath(os.path.dirname(os.path.abspath(__file__)))))
-
-
-pkg_path = "{}/SewFactory/packages".format(root_path)
-print(pkg_path)
-sys.path.insert(0, pkg_path)
+from env_constants import SEWFORMER_PROJ_ROOT, DATASET_ROOT
+sys.path.append(os.path.join(SEWFORMER_PROJ_ROOT, "SewFactory", "packages"))
 
 # My modules
-from customconfig import Properties
+# from customconfig import Properties
 from data.pattern_converter import NNSewingPattern, InvalidPatternDefError
 import data.transforms as transforms
 from data.panel_classes import PanelClasses
@@ -821,17 +814,24 @@ class GarmentDetrDataset(Dataset):
 
 if __name__ == '__main__':
     from data.wrapper import RealisticDatasetDetrWrapper
-    system = Properties('./system.json')
+    
     start_config = {
-        "panel_classification": "./assets/data_configs/panel_classes_condenced.json",
+        "panel_classification": os.path.join(
+            SEWFORMER_PROJ_ROOT, "Sewformer", "assets", "data_configs",
+            "panel_classes_condenced.json"
+        ),
         "max_pattern_len": 23, "max_panel_len": 14, "max_num_stitches": 28,
         "max_stitch_edges": 56, "element_size": 4, "rotation_size": 4, "translation_size": 3,
         "use_sim": True, "use_smpl_loss": True, "augment": True
     }
     
-    import ipdb; ipdb.set_trace()
+    # import ipdb; ipdb.set_trace()
     
-    dataset = GarmentDetrDataset(system['datasets_path'], None, start_config)
+    dataset = GarmentDetrDataset(
+        root_dir=os.path.join(DATASET_ROOT, "sewfactory"),
+        sim_root=os.path.join(DATASET_ROOT, "simimages"),
+        start_config=start_config
+    )
 
 
     example_data = dataset[0]
