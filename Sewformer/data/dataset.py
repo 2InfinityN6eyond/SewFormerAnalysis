@@ -21,9 +21,13 @@ parentdir = os.path.dirname(currentdir)
 
 print("CURRENT DIR : ", currentdir)
 print("PARENT DIR : ", parentdir)
+print("CURRENT DIR : ", currentdir)
+print("PARENT DIR : ", parentdir)
 
 sys.path.insert(0, parentdir)
 
+from env_constants import SEWFORMER_PROJ_ROOT, DATASET_ROOT
+sys.path.append(os.path.join(SEWFORMER_PROJ_ROOT, "SewFactory", "packages"))
 from env_constants import SEWFORMER_PROJ_ROOT, DATASET_ROOT
 sys.path.append(os.path.join(SEWFORMER_PROJ_ROOT, "SewFactory", "packages"))
 
