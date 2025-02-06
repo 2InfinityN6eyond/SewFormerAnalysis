@@ -838,7 +838,7 @@ if __name__ == '__main__':
     split_info = {"type": "percent", "split_on": "folder", "valid_per_type": 5, "test_per_type": 10}
     datawrapper = RealisticDatasetDetrWrapper(dataset, batch_size=64)
     
-    import ipdb; ipdb.set_trace()
+    # import ipdb; ipdb.set_trace()
     
     datawrapper.load_split(split_info, batch_size=64)
     datawrapper.standardize_data()

@@ -23,6 +23,6 @@ elif hostname == "hjp-MS-7D42" : # 3090 X 1
 elif hostname == "gpu-1" : # H100 X 8
     
     SEWFORMER_PROJ_ROOT  = "/data/hjp/VTO2025/REFERENCES/sewformer"
-    DATASET_ROOT    = "/data/hjp/VTO2025/DATASETs/sewfactory/TARs"
+    DATASET_ROOT    = "/data/hjp/VTO2025/DATASETs/SewFactory"
     
 WANDB_USERNAME = ""
