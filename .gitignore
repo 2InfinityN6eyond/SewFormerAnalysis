@@ -6,4 +6,7 @@ Sewformer/assets/data_configs/*.json
 *.tar.xz
 *.tar.gz
 *.npz
+*.zip
+*.pkl
+!Sewformer/assets/smplh/SMPLH_FEMALE.pkl
 
