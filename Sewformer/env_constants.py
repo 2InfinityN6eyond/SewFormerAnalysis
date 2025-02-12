@@ -41,7 +41,8 @@ elif hostname == "epyc64": # A6000 Ada X 4
 elif hostname == "server" : # 4090 X 4
     PYGARMENT_ROOT  = "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/3D_VTO/GarmentCode/GarmentCode"
     SEWFORMER_PROJ_ROOT  = "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis"
-    DATASET_ROOT    = "/media/hjp/05aba9a7-0e74-4e54-9bc9-5f11b9c4c757/sewfactory"
+    # DATASET_ROOT    = "/media/hjp/05aba9a7-0e74-4e54-9bc9-5f11b9c4c757/sewfactory"
+    DATASET_ROOT    = "/media/hjp/05aba9a7-0e74-4e54-9bc9-5f11b9c4c757/SewFactory/sewfactory"
 
 elif hostname == "hjp-MS-7D42" : # 3090 X 1
     DATASET_ROOT    = "/media/hjp/efef19d3-9b92-453c-ba04-c205f7233cab/VTO_DATASET/PoC59"
