@@ -1,4 +1,6 @@
 *.pth
 __pycache__
 Sewformer/assets/data_configs/data_split.json
+Sewformer/assets/data_configs/*.json
+
 
