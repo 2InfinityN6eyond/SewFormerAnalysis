@@ -3,4 +3,7 @@ __pycache__
 Sewformer/assets/data_configs/data_split.json
 Sewformer/assets/data_configs/*.json
 
+*.tar.xz
+*.tar.gz
+*.npz
 
