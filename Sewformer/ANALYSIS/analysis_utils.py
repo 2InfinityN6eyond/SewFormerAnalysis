@@ -72,6 +72,7 @@ def visualize_meshes_plotly(
     vertex_marker_size = 2,
     show_edges = True,
     edge_width = 2,
+    show = True,
 ):
     # Pre-convert to list and load meshes once
     mesh_list = [mesh_list] if not isinstance(mesh_list, list) else mesh_list
@@ -135,7 +136,9 @@ def visualize_meshes_plotly(
         showlegend=False
     )
     
-    fig.show()
+    if show:
+        fig.show()
+    return fig
     
     
     
