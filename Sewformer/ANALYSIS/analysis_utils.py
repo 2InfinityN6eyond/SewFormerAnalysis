@@ -232,7 +232,6 @@ def find_overlapping_vertices(mesh, threshold=0.001):
 
 
 
-
 def filter_segmentation_map(mesh, segmentation_list):
     """
     Filter segmentation map by fixing isolated vertices based on their neighbors
@@ -278,7 +277,7 @@ import networkx as nx
 from scipy.spatial import cKDTree
 import trimesh
 
-def filter_segmentation_map_clusters(mesh, segmentation_list, threshold=30):
+def filter_segmentation_map_clusters(mesh, segmentation_list, threshold=80):
     """
     Refines the segmentation of a mesh by removing small clusters 
     and replacing them with surrounding dominant segments.
@@ -328,43 +327,3 @@ def filter_segmentation_map_clusters(mesh, segmentation_list, threshold=30):
                     refined_segmentation[list(cluster)] = most_common_label
     
     return refined_segmentation.tolist()
-
-
-
-import numpy as np
-import trimesh
-from collections import Counter
-
-def reclassify_none_vertices(mesh, vertex_labels):
-    """
-    Reclassifies 'None' vertices based on neighboring vertex labels.
-    
-    Args:
-    - mesh (trimesh.Trimesh): The 3D mesh object.
-    - vertex_labels (list): A list of segmentation labels for each vertex. 'None' represents unclassified vertices.
-    
-    Returns:
-    - Updated vertex_labels with no 'None' values.
-    """
-    
-    # Convert to numpy array for easy indexing
-    vertex_labels = np.array(vertex_labels, dtype=object)
-    
-    # Get adjacency information from mesh
-    adjacency = mesh.vertex_neighbors
-
-    # Identify indices of "None" vertices
-    none_indices = np.where(vertex_labels == "None")[0]
-    
-    for idx in none_indices:
-        neighbors = adjacency[idx]  # Get neighboring vertex indices
-        neighbor_labels = [vertex_labels[n] for n in neighbors if vertex_labels[n] != "None"]
-
-        if len(neighbor_labels) == 0:
-            continue  # Skip if no valid neighbors exist
-        
-        # Majority voting among neighbors
-        most_common_label, count = Counter(neighbor_labels).most_common(1)[0]
-        vertex_labels[idx] = most_common_label  # Assign the most common neighbor class
-    
-    return vertex_labels.tolist()
