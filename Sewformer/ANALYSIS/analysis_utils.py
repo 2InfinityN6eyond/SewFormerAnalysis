@@ -327,3 +327,22 @@ def filter_segmentation_map_clusters(mesh, segmentation_list, threshold=80):
                     refined_segmentation[list(cluster)] = most_common_label
     
     return refined_segmentation.tolist()
+
+
+
+def is_clockwise(points):
+    """
+    Determine if a polygon is drawn clockwise or counterclockwise using the shoelace formula
+    Returns True if clockwise, False if counterclockwise
+    """
+    # Convert complex numbers to x,y coordinates if needed
+    if isinstance(points[0], complex):
+        points = [(p.real, p.imag) for p in points]
+    
+    # Calculate the area using shoelace formula
+    area = 0
+    for i in range(len(points)):
+        j = (i + 1) % len(points)
+        area += points[i][0] * points[j][1]
+        area -= points[j][0] * points[i][1]
+    return area > 0
