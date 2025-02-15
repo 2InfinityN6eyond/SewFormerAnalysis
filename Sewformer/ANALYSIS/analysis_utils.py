@@ -154,3 +154,217 @@ def v_id_map(vertices):
     return v_map
 
 
+import numpy as np
+from scipy.spatial import cKDTree
+
+
+def find_panel_boundary_vertices(mesh, panel_vertex_mask, threshold=1e-5):
+    """
+    Find boundary vertices for a given panel
+    Args:
+        mesh: trimesh.Trimesh
+        panel_vertex_mask: boolean array indicating which vertices belong to the panel
+        threshold: distance threshold for considering vertices as overlapping
+    Returns:
+        boundary_vertices: indices of boundary vertices
+        overlapping_vertices: dict mapping vertex indices to lists of nearby vertex indices
+    """
+    # Get panel vertices and faces
+    panel_vertices = mesh.vertices[panel_vertex_mask]
+    panel_vertex_indices = np.where(panel_vertex_mask)[0]
+    
+    # Find boundary vertices (vertices that are connected to non-panel vertices)
+    boundary_vertices = set()
+    overlapping_vertices = {}
+    
+    # For each edge in the mesh
+    for edge in mesh.edges:
+        v1, v2 = edge
+        v1_in_panel = panel_vertex_mask[v1]
+        v2_in_panel = panel_vertex_mask[v2]
+        
+        # If exactly one vertex is in the panel, the edge vertex in the panel is a boundary
+        if v1_in_panel != v2_in_panel:
+            if v1_in_panel:
+                boundary_vertices.add(v1)
+            if v2_in_panel:
+                boundary_vertices.add(v2)
+    
+    # Find overlapping vertices using KDTree
+    tree = cKDTree(mesh.vertices)
+    
+    for idx in panel_vertex_indices:
+        # Find all vertices within threshold distance
+        nearby_points = tree.query_ball_point(mesh.vertices[idx], threshold)
+        
+        # Remove self from nearby points and filter to only include points not in current panel
+        nearby_points = [p for p in nearby_points if p != idx and not panel_vertex_mask[p]]
+        
+        if nearby_points:
+            overlapping_vertices[idx] = nearby_points
+            
+    return list(boundary_vertices), overlapping_vertices
+
+
+def find_overlapping_vertices(mesh, threshold=0.001):
+    """
+    Find vertices that are within threshold distance of each other
+    Args:
+        mesh: trimesh.Trimesh - the mesh to analyze
+        threshold: float - distance threshold for considering vertices as overlapping
+    Returns:
+        overlapping_vertices: dict mapping vertex indices to lists of nearby vertex indices
+    """
+    tree = cKDTree(mesh.vertices)
+    overlapping_vertices = {}
+    
+    for vertex_idx in range(len(mesh.vertices)):
+        # Find all vertices within threshold distance
+        nearby_points = tree.query_ball_point(mesh.vertices[vertex_idx], threshold)
+        
+        # Remove self from nearby points
+        nearby_points = [p for p in nearby_points if p != vertex_idx]
+        
+        if nearby_points:
+            overlapping_vertices[vertex_idx] = nearby_points
+            
+    return overlapping_vertices
+
+
+
+
+def filter_segmentation_map(mesh, segmentation_list):
+    """
+    Filter segmentation map by fixing isolated vertices based on their neighbors
+    
+    Args:
+        mesh: trimesh.Trimesh object
+        segmentation_list: list of segmentation labels for each vertex
+    
+    Returns:
+        filtered_segmentation_list: list of filtered segmentation labels
+    """
+    # Convert to numpy array for easier manipulation
+    segmentation_array = np.array(segmentation_list)
+    filtered_segmentation = segmentation_array.copy()
+    
+    # Get vertex adjacency
+    vertex_neighbors = mesh.vertex_neighbors
+    
+    # Iterate through vertices
+    for vertex_idx in range(len(segmentation_array)):
+        current_label = segmentation_array[vertex_idx]
+        neighbors = vertex_neighbors[vertex_idx]
+        
+        if len(neighbors) == 0:
+            continue
+            
+        # Get neighbor labels
+        neighbor_labels = segmentation_array[neighbors]
+        
+        # Count occurrences of each label in neighbors
+        unique_labels, counts = np.unique(neighbor_labels, return_counts=True)
+        
+        # If current vertex label doesn't match majority of neighbors
+        if current_label not in neighbor_labels:
+            # Replace with most common neighbor label
+            filtered_segmentation[vertex_idx] = unique_labels[counts.argmax()]
+            
+    return filtered_segmentation.tolist()
+
+
+import numpy as np
+import networkx as nx
+from scipy.spatial import cKDTree
+import trimesh
+
+def filter_segmentation_map_clusters(mesh, segmentation_list, threshold=30):
+    """
+    Refines the segmentation of a mesh by removing small clusters 
+    and replacing them with surrounding dominant segments.
+    
+    Args:
+        mesh: trimesh.Trimesh object representing the garment mesh.
+        segmentation_list: List of segment labels for each vertex.
+        threshold: Minimum size of a valid cluster. Smaller clusters are reassigned.
+    
+    Returns:
+        A refined segmentation list.
+    """
+    segmentation_array = np.array(segmentation_list)  # Convert to NumPy array
+    
+    # Step 1: Build a graph of mesh connectivity
+    G = nx.Graph()
+    vertices = mesh.vertices
+    faces = mesh.faces
+    
+    for face in faces:
+        for i in range(3):
+            G.add_edge(face[i], face[(i + 1) % 3])  # Connect face vertices
+    
+    # Step 2: Find connected components within each segmentation label
+    label_to_components = {}
+    for label in np.unique(segmentation_array):
+        subgraph = G.subgraph([i for i, seg in enumerate(segmentation_array) if seg == label])
+        components = list(nx.connected_components(subgraph))
+        label_to_components[label] = components
+    
+    # Step 3: Identify small clusters and reassign them
+    refined_segmentation = segmentation_array.copy()
+    
+    for label, components in label_to_components.items():
+        for cluster in components:
+            if len(cluster) < threshold:  # If cluster is too small
+                # Find neighboring vertices with different segmentation
+                neighboring_labels = []
+                for vertex in cluster:
+                    for neighbor in G.neighbors(vertex):
+                        if refined_segmentation[neighbor] != label:
+                            neighboring_labels.append(refined_segmentation[neighbor])
+                
+                if neighboring_labels:
+                    # Assign the most frequent neighboring segmentation
+                    most_common_label = max(set(neighboring_labels), key=neighboring_labels.count)
+                    refined_segmentation[list(cluster)] = most_common_label
+    
+    return refined_segmentation.tolist()
+
+
+
+import numpy as np
+import trimesh
+from collections import Counter
+
+def reclassify_none_vertices(mesh, vertex_labels):
+    """
+    Reclassifies 'None' vertices based on neighboring vertex labels.
+    
+    Args:
+    - mesh (trimesh.Trimesh): The 3D mesh object.
+    - vertex_labels (list): A list of segmentation labels for each vertex. 'None' represents unclassified vertices.
+    
+    Returns:
+    - Updated vertex_labels with no 'None' values.
+    """
+    
+    # Convert to numpy array for easy indexing
+    vertex_labels = np.array(vertex_labels, dtype=object)
+    
+    # Get adjacency information from mesh
+    adjacency = mesh.vertex_neighbors
+
+    # Identify indices of "None" vertices
+    none_indices = np.where(vertex_labels == "None")[0]
+    
+    for idx in none_indices:
+        neighbors = adjacency[idx]  # Get neighboring vertex indices
+        neighbor_labels = [vertex_labels[n] for n in neighbors if vertex_labels[n] != "None"]
+
+        if len(neighbor_labels) == 0:
+            continue  # Skip if no valid neighbors exist
+        
+        # Majority voting among neighbors
+        most_common_label, count = Counter(neighbor_labels).most_common(1)[0]
+        vertex_labels[idx] = most_common_label  # Assign the most common neighbor class
+    
+    return vertex_labels.tolist()
