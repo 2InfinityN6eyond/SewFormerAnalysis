@@ -137,14 +137,14 @@ if __name__ == "__main__":
                 combination_path, "static", f"{garment_name}_{garment_name}.obj"
             )
             mesh = trimesh.load_mesh(mesh_path, process=False)
-            with open(
-                os.path.join(combination_path, "static", f"{garment_name}_{garment_name}_segmentation_filtered.txt"),
-                "r"
-            ) as f:
-                mesh_segmentation_list = list(map(
-                    lambda x : x.strip(),
-                    f.readlines()
-                ))
+            # with open(
+            #     os.path.join(combination_path, "static", f"{garment_name}_{garment_name}_segmentation_filtered.txt"),
+            #     "r"
+            # ) as f:
+            #     mesh_segmentation_list = list(map(
+            #         lambda x : x.strip(),
+            #         f.readlines()
+            #     ))
             texture_image = Image.open(os.path.join(
                 combination_path, "static", f"{garment_name}_{garment_name}_uv.png"
             ))
@@ -156,7 +156,7 @@ if __name__ == "__main__":
             
             static_garment_dict[garment_name] = {
                 "mesh" : mesh,
-                "mesh_segmentation_list" : mesh_segmentation_list
+                # "mesh_segmentation_list" : mesh_segmentation_list
             }
 
         static_cam_name_list = list(static_camera_dict.keys())
