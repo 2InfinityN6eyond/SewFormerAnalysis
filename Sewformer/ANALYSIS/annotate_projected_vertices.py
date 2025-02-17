@@ -32,40 +32,46 @@ def filter_fn(path):
     if not os.path.exists(os.path.join(path, "static", "spec_config.json")):
         print(f"No spec_config.json in {path}")
         return False
-    
-    
-    combination_path = path
-    spec_config_path = os.path.join(combination_path, "static", "spec_config.json")
-    with open(spec_config_path, "r") as f:
-        spec_config = json.load(open(spec_config_path, "r"))
 
-    combination_garment_name_list = list(map(
-        lambda x : os.path.basename(x["spec"].replace("\\", "/")),
-        spec_config.values()
-    ))
+    try:
+        combination_path = path
+        spec_config_path = os.path.join(combination_path, "static", "spec_config.json")
+        with open(spec_config_path, "r", encoding='utf-8') as f:
+            spec_config = json.load(f)
 
-    static_camera_dict = {}
-    for camera_path in sorted(glob(os.path.join(combination_path, "static", "*cam_pos.json"))):
-        with open(camera_path, "r") as f:
-            camera_data = json.load(f)
-        camera_name = os.path.basename(camera_path).replace("_cam_pos.json", "")
-        static_camera_dict[camera_name] = camera_data
-        
+        combination_garment_name_list = list(map(
+            lambda x : os.path.basename(x["spec"].replace("\\", "/")),
+            spec_config.values()
+        ))
 
-    # if already annotated, skip
-    if (
-        len(glob(
-            os.path.join(combination_path, "static", "*_visibility_mask.pkl")
-        )) == len(combination_garment_name_list) * len(static_camera_dict)
-    ) and (
-        len(glob(
-            os.path.join(combination_path, "static", "*_pixel_coords.pkl")
-        )) == len(combination_garment_name_list) * len(static_camera_dict)
-    ) :
+        static_camera_dict = {}
+        for camera_path in sorted(glob(os.path.join(combination_path, "static", "*cam_pos.json"))):
+            try:
+                with open(camera_path, "r", encoding='utf-8') as f:
+                    camera_data = json.load(f)
+                camera_name = os.path.basename(camera_path).replace("_cam_pos.json", "")
+                static_camera_dict[camera_name] = camera_data
+            except UnicodeDecodeError:
+                print(f"Warning: Could not read camera file {camera_path} - skipping")
+                continue
+
+        # if already annotated, skip
+        if (
+            len(glob(
+                os.path.join(combination_path, "static", "*_visibility_mask.pkl")
+            )) == len(combination_garment_name_list) * len(static_camera_dict)
+        ) and (
+            len(glob(
+                os.path.join(combination_path, "static", "*_pixel_coords.pkl")
+            )) == len(combination_garment_name_list) * len(static_camera_dict)
+        ):
+            return False
+            
+        return True
+    except Exception as e:
+        print(f"Error processing {path}: {e}")
         return False
-        
-    
-    return True
+
 
 
 
