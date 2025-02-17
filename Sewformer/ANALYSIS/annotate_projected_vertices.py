@@ -16,6 +16,7 @@ from ANALYSIS.analysis_utils import (
     filter_segmentation_map_clusters,
     is_clockwise,
 )
+import traceback
 
 from env_constants import SEWFORMER_PROJ_ROOT, DATASET_ROOT, PYGARMENT_ROOT
 
@@ -31,6 +32,39 @@ def filter_fn(path):
     if not os.path.exists(os.path.join(path, "static", "spec_config.json")):
         print(f"No spec_config.json in {path}")
         return False
+    
+    
+    combination_path = path
+    spec_config_path = os.path.join(combination_path, "static", "spec_config.json")
+    with open(spec_config_path, "r") as f:
+        spec_config = json.load(open(spec_config_path, "r"))
+
+    combination_garment_name_list = list(map(
+        lambda x : os.path.basename(x["spec"].replace("\\", "/")),
+        spec_config.values()
+    ))
+
+    static_camera_dict = {}
+    for camera_path in sorted(glob(os.path.join(combination_path, "static", "*cam_pos.json"))):
+        with open(camera_path, "r") as f:
+            camera_data = json.load(f)
+        camera_name = os.path.basename(camera_path).replace("_cam_pos.json", "")
+        static_camera_dict[camera_name] = camera_data
+        
+
+    # if already annotated, skip
+    if (
+        len(glob(
+            os.path.join(combination_path, "static", "*_visibility_mask.pkl")
+        )) == len(combination_garment_name_list) * len(static_camera_dict)
+    ) and (
+        len(glob(
+            os.path.join(combination_path, "static", "*_pixel_coords.pkl")
+        )) == len(combination_garment_name_list) * len(static_camera_dict)
+    ) :
+        return False
+        
+    
     return True
 
 
@@ -76,6 +110,7 @@ if __name__ == "__main__":
     for combination_path in tqdm(combination_path_list) :
         try :
 
+
             spec_config_path = os.path.join(combination_path, "static", "spec_config.json")
             with open(spec_config_path, "r") as f:
                 spec_config = json.load(open(spec_config_path, "r"))
@@ -85,6 +120,7 @@ if __name__ == "__main__":
                 spec_config.values()
             ))
 
+
             static_camera_dict = {}
             for camera_path in sorted(glob(os.path.join(combination_path, "static", "*cam_pos.json"))):
                 with open(camera_path, "r") as f:
@@ -92,6 +128,8 @@ if __name__ == "__main__":
                 camera_name = os.path.basename(camera_path).replace("_cam_pos.json", "")
                 static_camera_dict[camera_name] = camera_data
                 
+
+
 
             with open(os.path.join(combination_path, "static", "static__body_info.json"), "r") as f:
                 static_body_data = json.load(f)
@@ -281,4 +319,6 @@ if __name__ == "__main__":
                         pickle.dump(pixel_coords, f)
         except Exception as e:
             print(f"Error in {combination_path}: {e}")
+            traceback.print_exc()
+            print()
             continue
