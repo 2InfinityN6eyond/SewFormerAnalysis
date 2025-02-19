@@ -40,7 +40,7 @@ _pycache_
 *.pyc
 
 examples
-meta_infos
+# meta_infos
 packages/mayaqltools/garment_playblast.py
 packages/mayaqltools/maya_garment.py
 packages/mayaqltools/simple_materials.py
