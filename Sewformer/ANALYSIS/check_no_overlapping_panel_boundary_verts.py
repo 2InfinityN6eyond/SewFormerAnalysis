@@ -67,7 +67,6 @@ def disassemble_mesh_to_panels(mesh, segmentation_list):
 
     # Step 2: Find connected components (each should be an individual panel)
     connected_components = list(nx.connected_components(mesh_graph))
-    print(f"Found {len(connected_components)} separate panel meshes.")
 
     # Step 3: Extract panel sub-meshes
     panel_meshes = []

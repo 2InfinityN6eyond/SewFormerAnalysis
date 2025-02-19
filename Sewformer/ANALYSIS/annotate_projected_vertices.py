@@ -119,7 +119,7 @@ if __name__ == "__main__":
 
             spec_config_path = os.path.join(combination_path, "static", "spec_config.json")
             with open(spec_config_path, "r") as f:
-                spec_config = json.load(open(spec_config_path, "r"))
+                spec_config = json.load(f)
 
             combination_garment_name_list = list(map(
                 lambda x : os.path.basename(x["spec"].replace("\\", "/")),
