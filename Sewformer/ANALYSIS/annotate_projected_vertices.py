@@ -73,8 +73,6 @@ def filter_fn(path):
         return False
 
 
-
-
 if __name__ == "__main__":
     
     import os

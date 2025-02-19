@@ -17,7 +17,6 @@ elif hostname == "server" : # 4090 X 4
     SEWFORMER_PROJ_ROOT  = "/media/hjp/db6095ca-a560-4c3a-90ad-b667ec189671/REFERENCES/SewFormerAnalysis"
     # DATASET_ROOT    = "/media/hjp/05aba9a7-0e74-4e54-9bc9-5f11b9c4c757/sewfactory"
     DATASET_ROOT    = "/media/hjp/05aba9a7-0e74-4e54-9bc9-5f11b9c4c757/SewFactory/sewfactory"
-    SEWING_DATA_ROOT = "/media/hjp/05aba9a7-0e74-4e54-9bc9-5f11b9c4c757/3D_GARMENT_SEWING_GEN"
 
 elif hostname == "hjp-MS-7D42" : # 3090 X 1
     DATASET_ROOT    = "/media/hjp/efef19d3-9b92-453c-ba04-c205f7233cab/VTO_DATASET/PoC59"
@@ -25,7 +24,7 @@ elif hostname == "hjp-MS-7D42" : # 3090 X 1
 elif hostname == "gpu-1" : # H100 X 8
     PYGARMENT_ROOT  = "/data/hjp/VTO2025/GarmentCodeAnalysis"
     SEWFORMER_PROJ_ROOT  = "/data/hjp/VTO2025/REFERENCES/sewformer"
-    DATASET_ROOT    = "/data/hjp/VTO2025/DATASETs/SewFactory"
-    SEWING_DATA_ROOT = "/data/hjp/VTO2025/DATASETs/SewingPattern"
+    # DATASET_ROOT    = "/data/hjp/VTO2025/DATASETs/SewFactory"
+    DATASET_ROOT    = "/data/hjp/VTO2025/DATASETs/SewFactory2"
     
 WANDB_USERNAME = ""
