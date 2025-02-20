@@ -1,0 +1,127 @@
+{
+  "ID": "[6329, [2]]", 
+  "body": {
+    "name": "D:/garment/bodies2\\54\\54_10_poses.npz_367.fbx", 
+    "shape": [
+      0.0, 
+      0.0, 
+      0.0, 
+      0.0, 
+      0.0, 
+      0.0, 
+      -0.99127596616745, 
+      0.0, 
+      0.0, 
+      -0.15486082434654236
+    ], 
+    "texture": "D:/garment/body_texture\\grey_female_0466.jpg", 
+    "total_frames": 3.0
+  }, 
+  "body_path": "D:/garment/bodies2", 
+  "body_sum": 16899, 
+  "garment_dirs": {
+    "bottom": [
+      "pants_straight_sides_1327", 
+      "skirt_2_panels_1770", 
+      "skirt_4_panels_1159", 
+      "skirt_8_panels_1241", 
+      "wb_pants_straight_657"
+    ], 
+    "one_piece": [
+      "dress_sleeveless_2587", 
+      "jumpsuit_sleeveless_2900", 
+      "wb_dress_sleeveless_2789"
+    ], 
+    "top": [
+      "tee_3827", 
+      "tee_sleeveless_2966"
+    ]
+  }, 
+  "garments": {
+    "config": {
+      "delta": {
+        "one_piece": [
+          -1.3689206237792968, 
+          91.31552176643868, 
+          -30.739926785139293
+        ]
+      }, 
+      "load_stats": {
+        "one_piece": true
+      }, 
+      "mtl_specs": {
+        "one_piece": "cotton"
+      }, 
+      "pattern_specs": {
+        "one_piece": "dress_sleeveless_2587\\dress_sleeveless_00F3PNYG6L"
+      }, 
+      "render_stats": {
+        "one_piece": {
+          "random_params": {
+            "bumpDepth": 0.08409277010999568, 
+            "fileTextureName": "D:/garment/fabric_texture\\9d85373c955bf78f56945d388743cd87.png", 
+            "rgbalayer_color": [
+              0.00392156862745098, 
+              0.002953903524572238, 
+              0.002953903524572238
+            ]
+          }
+        }, 
+        "time": 35.348999977111816
+      }, 
+      "save_path": "D:/garment/output2_3\\dress_sleeveless_00F3PNYG6L", 
+      "sim_stats": {
+        "one_piece": {
+          "framsamples": 3
+        }, 
+        "stat": true, 
+        "time": 92.06000018119812
+      }
+    }, 
+    "stats": {}
+  }, 
+  "name": "tee_skirt", 
+  "render": {
+    "config": {
+      "materials": "C:/Users/liangjb/code/garmentdatasetgeneration/data_generation/Scenes\\materials.mb", 
+      "resolution": [
+        1024, 
+        1024
+      ], 
+      "shape_skip": 4
+    }, 
+    "stats": {
+      "render_time": {}
+    }
+  }, 
+  "sim": {
+    "config": {
+      "body_friction": 0.0, 
+      "object_intersect_border_threshold": 200, 
+      "resolution_scale": 4, 
+      "selfCollision": 1, 
+      "self_intersect_hit_threshold": 50, 
+      "zero_gravity_steps": 3
+    }, 
+    "stats": {
+      "fails": {}, 
+      "fin_frame": {}, 
+      "sim_time": {}, 
+      "spf": {}
+    }
+  }, 
+  "size": 0, 
+  "system_info": {
+    "GPU": [
+      "Intel(R) UHD Graphics 750", 
+      "NVIDIA GeForce RTX 3090"
+    ], 
+    "architecture": "AMD64", 
+    "platform": "Windows", 
+    "platform-release": "10", 
+    "platform-version": "10.0.19041", 
+    "processor": "Intel64 Family 6 Model 167 Stepping 1, GenuineIntel", 
+    "ram": "64 GB"
+  }, 
+  "to_subfolders": true
+}
