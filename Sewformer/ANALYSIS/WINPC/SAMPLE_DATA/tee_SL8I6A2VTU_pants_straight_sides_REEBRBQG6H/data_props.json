@@ -1,0 +1,157 @@
+{
+  "ID": "[8905, [2265, 543]]", 
+  "body": {
+    "name": "D:/garment/bodies2\\80\\80_02_poses.npz_31.fbx", 
+    "shape": [
+      -1.47697913646698, 
+      0.5184874534606934, 
+      -0.187367781996727, 
+      -1.202513337135315, 
+      1.2545320987701416, 
+      -1.2758485078811646, 
+      -0.8961039781570435, 
+      0.26440852880477905, 
+      0.6257888674736023, 
+      -1.230064034461975
+    ], 
+    "texture": "D:/garment/body_texture\\grey_female_0210.jpg", 
+    "total_frames": 3.0
+  }, 
+  "body_path": "D:/garment/bodies2", 
+  "body_sum": 16899, 
+  "garment_dirs": {
+    "bottom": [
+      "pants_straight_sides_1327", 
+      "skirt_2_panels_1770", 
+      "skirt_4_panels_1159", 
+      "skirt_8_panels_1241", 
+      "wb_pants_straight_657"
+    ], 
+    "one_piece": [
+      "dress_sleeveless_2587", 
+      "jumpsuit_sleeveless_2900", 
+      "wb_dress_sleeveless_2789"
+    ], 
+    "top": [
+      "tee_3827", 
+      "tee_sleeveless_2966"
+    ]
+  }, 
+  "garments": {
+    "config": {
+      "delta": {
+        "bottom": [
+          45.03569287109375, 
+          112.16955592971034, 
+          -20.36022439581011
+        ], 
+        "top": [
+          45.03569287109375, 
+          112.16955592971034, 
+          -20.36022439581011
+        ]
+      }, 
+      "load_stats": {
+        "bottom": true, 
+        "top": true
+      }, 
+      "mtl_specs": {
+        "bottom": "velvet", 
+        "top": "velvet"
+      }, 
+      "pattern_specs": {
+        "bottom": "pants_straight_sides_1327\\pants_straight_sides_REEBRBQG6H", 
+        "top": "tee_3827\\tee_SL8I6A2VTU"
+      }, 
+      "render_stats": {
+        "bottom": {
+          "random_params": {
+            "fileTextureName": "D:/garment/fabric_texture\\seamless-christmas-pattern-with-colorful-asterisks-vector-40402092.jpg", 
+            "vel_mtl1_base_color": [
+              0.9185111128340455, 
+              0.5436786525601486, 
+              0.9499931676367636
+            ], 
+            "vel_mtl2_base_color": [
+              0.5977881175721305, 
+              0.8099787891436493, 
+              0.710374608510262
+            ]
+          }
+        }, 
+        "time": 54.5460000038147, 
+        "top": {
+          "random_params": {
+            "fileTextureName": "D:/garment/fabric_texture\\cf97796fb148cd3a08bd33d8188e3e60.png", 
+            "vel_mtl1_base_color": [
+              0.21239345029596302, 
+              0.0586463962554753, 
+              0.0768731447962614
+            ], 
+            "vel_mtl2_base_color": [
+              0.6475251914274109, 
+              0.478651212716917, 
+              0.2929799043705029
+            ]
+          }
+        }
+      }, 
+      "save_path": "D:/garment/output2_3\\tee_SL8I6A2VTU_pants_straight_sides_REEBRBQG6H", 
+      "sim_stats": {
+        "bottom": {
+          "framsamples": 3
+        }, 
+        "stat": true, 
+        "time": 150.54900002479553, 
+        "top": {
+          "framsamples": 4
+        }
+      }
+    }, 
+    "stats": {}
+  }, 
+  "name": "tee_skirt", 
+  "render": {
+    "config": {
+      "materials": "C:/Users/liangjb/code/garmentdatasetgeneration/data_generation/Scenes\\materials.mb", 
+      "resolution": [
+        1024, 
+        1024
+      ], 
+      "shape_skip": 4
+    }, 
+    "stats": {
+      "render_time": {}
+    }
+  }, 
+  "sim": {
+    "config": {
+      "body_friction": 0.0, 
+      "object_intersect_border_threshold": 200, 
+      "resolution_scale": 4, 
+      "selfCollision": 1, 
+      "self_intersect_hit_threshold": 50, 
+      "zero_gravity_steps": 3
+    }, 
+    "stats": {
+      "fails": {}, 
+      "fin_frame": {}, 
+      "sim_time": {}, 
+      "spf": {}
+    }
+  }, 
+  "size": 0, 
+  "system_info": {
+    "GPU": [
+      "Intel(R) UHD Graphics 750", 
+      "NVIDIA GeForce RTX 3090"
+    ], 
+    "architecture": "AMD64", 
+    "platform": "Windows", 
+    "platform-release": "10", 
+    "platform-version": "10.0.19041", 
+    "processor": "Intel64 Family 6 Model 167 Stepping 1, GenuineIntel", 
+    "ram": "64 GB"
+  }, 
+  "to_subfolders": true
+}
