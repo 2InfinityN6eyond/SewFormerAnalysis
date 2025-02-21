@@ -9,4 +9,4 @@ Sewformer/assets/data_configs/*.json
 *.zip
 *.pkl
 !Sewformer/assets/smplh/SMPLH_FEMALE.pkl
-
+!SewFactory/meta_infos/fbx_metas/joints_mat_v1.0.2.pkl
