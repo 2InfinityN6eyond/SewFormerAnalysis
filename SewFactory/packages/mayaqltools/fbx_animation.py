@@ -18,13 +18,14 @@ import pymel.core as pm
 pm.loadPlugin("fbxmaya") # LOAD PLUGIN
 
 # Arnold
-import mtoa.utils as mutils
-from mtoa.cmds.arnoldRender import arnoldRender
-import mtoa.core
+# import mtoa.utils as mutils
+# from mtoa.cmds.arnoldRender import arnoldRender
+# import mtoa.core
 # import pymel.core as pm
 # pm.loadPlugin("fbxmaya") # LOAD PLUGIN
 
 from mayaqltools import utils
+from imp import reload
 reload(utils)
 
 class SmplBody(object):

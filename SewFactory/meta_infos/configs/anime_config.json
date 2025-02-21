@@ -1,5 +1,5 @@
 {
-    "joints_mat_path": "meta_infos\\fbx_metas\\joints_mat_SMPLH.npz",
+    "joints_mat_path": "meta_infos\\fbx_metas\\joints_mat_v1.0.2.pkl",
     "body_file": "",
     "texture_file": "examples\\skin_textures",
     "pose_file": "",

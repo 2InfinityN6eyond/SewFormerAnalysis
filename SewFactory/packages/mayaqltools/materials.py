@@ -20,6 +20,7 @@ import maya.api.OpenMaya as OM
 # import mtoa.core
 
 from mayaqltools import utils
+from imp import reload
 reload(utils)
 
 class GarmentMaterials(object):

@@ -32,7 +32,9 @@ from mtoa.cmds.arnoldRender import arnoldRender
 import mtoa.core
 
 from mayaqltools import utils
+from imp import reload
 reload(utils)
+
 # from mayaqltools import simple_materials
 from mayaqltools import materials
 

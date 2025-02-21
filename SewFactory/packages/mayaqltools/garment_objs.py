@@ -1,6 +1,9 @@
 # Basic
 from __future__ import print_function
 from __future__ import division
+
+from imp import reload
+
 #from curses.ascii import BEL
 from functools import partial
 import copy
@@ -26,9 +29,9 @@ from maya import OpenMaya
 import maya.api.OpenMaya as OM
 
 # Arnold
-import mtoa.utils as mutils
-from mtoa.cmds.arnoldRender import arnoldRender
-import mtoa.core
+# import mtoa.utils as mutils
+# from mtoa.cmds.arnoldRender import arnoldRender
+# import mtoa.core
 
 # My modules
 import pattern.core as core

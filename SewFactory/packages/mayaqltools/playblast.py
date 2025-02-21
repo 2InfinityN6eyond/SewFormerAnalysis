@@ -13,7 +13,8 @@ import sys
 import time
 import json
 from shutil import copyfile
-from .garment import Garment
+
+
 
 from maya import cmds
 import maya.standalone 	
@@ -21,10 +22,17 @@ import maya.standalone
 # My modules
 import customconfig
 # reload in case we are in Maya internal python environment
+
+from imp import reload
 reload(customconfig)
 from mayaqltools import maya_scene, garment_objs, fbx_animation  
 from mayaqltools import qualothwrapper as qw
+from mayaqltools.garment import Garment
+
 from copy import deepcopy
+
+
+
 
 class GarmentPlayblast(object):
     """
