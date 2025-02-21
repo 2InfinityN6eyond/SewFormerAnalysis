@@ -63,13 +63,16 @@ using any of the functions in the plugin. Select only the mesh of the model
 you want to update and then click the appropriate button on the UI.
 
 '''
+from __future__ import print_function
+
 
 import maya.cmds as cmds
 import maya.OpenMaya as OpenMaya
 import maya.OpenMayaMPx as OpenMayaMPx
 from functools import partial
 import sys
-import cPickle as pickle
+# import cPickle as pickle
+import pickle
 from os.path import exists, split
 
 
@@ -151,21 +154,21 @@ class ui():
         selection = cmds.ls( selection=True, showType=True )
 
         if len(selection) != 2:
-            print '\nError: select only the mesh'
+            print('\nError: select only the mesh')
             return
 
         if selection[1]!= 'transform' and selection[1]!= 'mesh':
-            print "\nError: Please select a mesh object"
+            print("\nError: Please select a mesh object")
             return
 
         maya_mesh = selection[0] if selection[1]=='mesh' else cmds.listRelatives( selection[0], type='mesh' )[0]
 
         if cmds.listConnections( maya_mesh, type='skinCluster' ) == []:
-            print '\nError: Selected object has no Skin Cluster node (skeleton is not attached)'
+            print('\nError: Selected object has no Skin Cluster node (skeleton is not attached)')
             return
         objset = cmds.listConnections( maya_mesh, type='objectSet' )
         if objset == [] or cmds.listConnections( objset, type='blendShape' ) == []:
-            print '\nError: Selected object has no Blenshapes node'
+            print('\nError: Selected object has no Blenshapes node')
             return
 
         charID = cmds.listRelatives( maya_mesh, parent=True )[0]
@@ -182,7 +185,7 @@ class ui():
         else:
             currentTime = int(cmds.currentTime( query=True ))
             frame_range = [ currentTime, currentTime+1 ]
-        print 'frame_range: ', frame_range
+        print('frame_range: ', frame_range)
 
         ## get all bones attached to skin (that excludes root)
         maya_jnt_tree = cmds.skinCluster(lbs_cluster, query=True, wi = True)
@@ -230,21 +233,21 @@ class ui():
         selection = cmds.ls( selection=True, showType=True )
 
         if len(selection) != 2:
-            print '\nError: select only the mesh'
+            print('\nError: select only the mesh')
             return
 
         if selection[1]!= 'transform' and selection[1]!= 'mesh':
-            print "\nError: Please select a mesh object"
+            print("\nError: Please select a mesh object")
             return
 
         maya_mesh = selection[0] if selection[1]=='mesh' else cmds.listRelatives( selection[0], type='mesh' )[0]
 
         if cmds.listConnections( maya_mesh, type='skinCluster' ) == []:
-            print '\nError: Selected object has no Skin Cluster node (skeleton is not attached)'
+            print('\nError: Selected object has no Skin Cluster node (skeleton is not attached)')
             return
         objset = cmds.listConnections( maya_mesh, type='objectSet' )
         if objset == [] or cmds.listConnections( objset, type='blendShape' ) == []:
-            print '\nError: Selected object has no Blenshapes node'
+            print('\nError: Selected object has no Blenshapes node')
             return
 
         lbs_cluster = cmds.listConnections( maya_mesh, type='skinCluster' )[0]
@@ -274,8 +277,8 @@ class ui():
         ## Find joints_mat_v*.pkl file & return if missing
         joints_mat_path = '%s/joints_mat_v%s.pkl' % (plugin_dir, VERSION)
         if not exists( joints_mat_path ):
-            print '\nError: Missing \'joints_mat_v%s.pkl\' file.' % VERSION
-            print 'Please make sure the \'joints_mat_v%s.pkl\' file is in the same location as the SMPL_maya_plugin.py file.' % VERSION
+            print('\nError: Missing \'joints_mat_v%s.pkl\' file.' % VERSION)
+            print('Please make sure the \'joints_mat_v%s.pkl\' file is in the same location as the SMPL_maya_plugin.py file.' % VERSION)
             return
 
 
@@ -284,20 +287,20 @@ class ui():
 
         ## Check if selected object is only one mesh & return if not
         if len(selection) != 2:
-            print '\nError: select only the mesh'
+            print('\nError: select only the mesh')
             return
         if selection[1]!= 'transform' and selection[1]!= 'mesh':
-            print "\nError: Please select a mesh object"
+            print("\nError: Please select a mesh object")
             return
         maya_mesh = selection[0] if selection[1]=='mesh' else cmds.listRelatives( selection[0], type='mesh' )[0]
 
         ## Get skinning node & return if missing
         if cmds.listConnections( maya_mesh, type='skinCluster' ) == []:
-            print '\nError: Selected object has no Skin Cluster node (skeleton is not attached)'
+            print('\nError: Selected object has no Skin Cluster node (skeleton is not attached)')
             return
         objset = cmds.listConnections( maya_mesh, type='objectSet' )
         if objset == [] or cmds.listConnections( objset, type='blendShape' ) == []:
-            print '\nError: Selected object has no Blenshapes node'
+            print('\nError: Selected object has no Blenshapes node')
             return
 
         ## Get model-specific parameters: name, joint-names, blendshapes node
@@ -337,7 +340,7 @@ class scriptedCommand(OpenMayaMPx.MPxCommand):
 
     # Invoked when the command is run.
     def doIt(self,argList):
-        print "..Loading: SMPL_maya_plugin"
+        print("..Loading: SMPL_maya_plugin")
 
 # Creator
 def cmdCreator():
