@@ -39,7 +39,7 @@ Thumbs.db
 _pycache_
 *.pyc
 
-examples
+# examples
 # meta_infos
 packages/mayaqltools/garment_playblast.py
 packages/mayaqltools/maya_garment.py
