@@ -23,6 +23,7 @@ elif hostname == "hjp-MS-7D42" : # 3090 X 1
 elif hostname == "DESKTOP-0IJAC10" : # 3090 X 1
     DATASET_ROOT        = "D:\VTO2025\sewfactory"
     SEWFORMER_PROJ_ROOT = 'c:\\Users\\dytpq0916\\VTO2025\\REFERENCES\\SewFormerAnalysis'
+    PYGARMENT_ROOT      = 'C:\\Users\\dytpq0916\\VTO2025\\REFERENCES\\GarmentCodeAnalysis'
 
 elif hostname == "gpu-1" : # H100 X 8
     PYGARMENT_ROOT      = "/data/hjp/VTO2025/GarmentCodeAnalysis"
@@ -30,5 +31,7 @@ elif hostname == "gpu-1" : # H100 X 8
     # DATASET_ROOT    = "/data/hjp/VTO2025/DATASETs/SewFactory"
     DATASET_ROOT        = "/data/hjp/VTO2025/DATASETs/SewFactory2"
     
+
+
 
 WANDB_USERNAME = ""

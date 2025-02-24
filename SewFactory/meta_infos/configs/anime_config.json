@@ -4,9 +4,9 @@
     "texture_file": "examples\\skin_textures",
     "pose_file": "",
     "animated": false,
-    "num_frames": 4,
-    "export_log": false,
-    "export_folder": "",
+    "num_frames": 40,
+    "export_log": true,
+    "export_folder": "examples\\results",
     "extend_time_stamp": [
         -150,
         -200

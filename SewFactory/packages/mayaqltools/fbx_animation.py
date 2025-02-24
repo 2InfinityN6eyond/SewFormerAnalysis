@@ -18,13 +18,14 @@ import pymel.core as pm
 pm.loadPlugin("fbxmaya") # LOAD PLUGIN
 
 # Arnold
-import mtoa.utils as mutils
-from mtoa.cmds.arnoldRender import arnoldRender
-import mtoa.core
+# import mtoa.utils as mutils
+# from mtoa.cmds.arnoldRender import arnoldRender
+# import mtoa.core
 # import pymel.core as pm
 # pm.loadPlugin("fbxmaya") # LOAD PLUGIN
 
 from mayaqltools import utils
+from imp import reload
 reload(utils)
 
 class SmplBody(object):
@@ -69,9 +70,37 @@ class SmplBody(object):
         # scale smpl unit into cm
         self._scale_smpl_body()
         
-        self.apply_texture()
+        # self.apply_texture()
 
         self._center_position()
+
+        import ipdb; ipdb.set_trace()
+
+
+
+    def export_obj_sequence(self, export_dir):
+        # Create export directory if it doesn't exist
+        if not os.path.exists(export_dir):
+            os.makedirs(export_dir)
+        # Loop through each frame of the animation
+        for frame in range(0, self.final_frame + 1):
+            cmds.currentTime(frame)
+            # Duplicate the deformed SMPLH mesh
+            bakedMesh = cmds.duplicate(self.body_fSMPL, name="bakedMesh_{}".format(frame))[0]
+            # Delete history to bake in skinning, blend shapes, etc.
+            cmds.delete(bakedMesh, constructionHistory=True)
+            # Select the baked mesh
+            cmds.select(bakedMesh)
+            # Construct filename for this frame
+            filename = os.path.join(export_dir, "smplh_pose_{:04d}.obj".format(frame))
+            # Export the baked mesh as an OBJ
+            cmds.file(filename, force=True, 
+                    options="groups=1; ptgroups=1; materials=1; smoothing=1", 
+                    type="OBJexport", exportSelected=True)
+            # Clean up the temporary baked mesh
+            cmds.delete(bakedMesh)
+
+
 
 
     def load_body(self, ):
@@ -121,12 +150,13 @@ class SmplBody(object):
                     continue
                 bone = '%s_%s' % (self.bone_prefix, j_name)
                 c_pose = poses[frame, jidx*3 : jidx*3 +3]
+                c_pose_deg = np.rad2deg(c_pose)
                 if 'Pelvis' in bone:
-                    cmds.setAttr(bone + '.rotate', float(c_pose[0]),float(c_pose[1]), float(c_pose[2]))
+                    cmds.setAttr(bone + '.rotate', float(c_pose_deg[0]),float(c_pose_deg[1]), float(c_pose_deg[2]))
                     cmds.setAttr(bone + '.translate', float(trs[0] * 100), float(trs[2] * 100), float(trs[1] * (-100)))
                     cmds.setKeyframe(bone + '.translate', breakdown=False, controlPoints=False, shape=False)
                 else:
-                    cmds.setAttr(bone + '.rotate', float(c_pose[0]),float(c_pose[1]), float(c_pose[2]))
+                    cmds.setAttr(bone + '.rotate', float(c_pose_deg[0]),float(c_pose_deg[1]), float(c_pose_deg[2]))
                 cmds.setKeyframe(bone + '.rotate', breakdown=False, controlPoints=False, shape=False)
                 if jidx > 0:
                     cmds.select(bone, replace=True) 
@@ -148,6 +178,62 @@ class SmplBody(object):
             self.export_fbx(save_fn)
 
         return True
+
+
+
+    # def add_motion(self, bodyfbx):
+
+    #     self.pose_file = self.config["pose_file"]
+    #     poses, trans, total_frames, gender = utils.load_pose_data(self.pose_file, )
+    #     num_frames = min(self.config["num_frames"], total_frames)
+    #     assert total_frames >= num_frames, "At least {} frames".format(num_frames)
+    #     poses = poses[:num_frames]
+    #     trans = trans[:num_frames]
+
+    #     self._collect_body_params(bodyfbx)
+        
+    #     # anime
+    #     autokey_state = cmds.autoKeyframe(query=True, state=True)
+    #     cmds.autoKeyframe(state=False)
+    #     self._cutkey(self.blendShape, self.skeleton)
+
+    #     max_bones = poses.shape[1] // 3
+    #     for frame in range(num_frames):
+    #         cmds.currentTime(frame)
+    #         trs = trans[frame] 
+    #         for jidx, j_name in self.j_names.items():
+    #             if jidx + 1 >= max_bones:
+    #                 continue
+    #             bone = '%s_%s' % (self.bone_prefix, j_name)
+    #             c_pose = poses[frame, jidx*3 : jidx*3 +3]
+    #             if 'Pelvis' in bone:
+    #                 cmds.setAttr(bone + '.rotate', float(c_pose[0]),float(c_pose[1]), float(c_pose[2]))
+    #                 cmds.setAttr(bone + '.translate', float(trs[0] * 100), float(trs[2] * 100), float(trs[1] * (-100)))
+    #                 cmds.setKeyframe(bone + '.translate', breakdown=False, controlPoints=False, shape=False)
+    #             else:
+    #                 cmds.setAttr(bone + '.rotate', float(c_pose[0]),float(c_pose[1]), float(c_pose[2]))
+    #             cmds.setKeyframe(bone + '.rotate', breakdown=False, controlPoints=False, shape=False)
+    #             if jidx > 0:
+    #                 cmds.select(bone, replace=True) 
+    #                 real_m = np.array(cmds.xform(query=True, matrix=True)).reshape((4, 4)).T
+    #                 for mi, rot_element in enumerate((real_m[:3, :3] - np.eye(3)).ravel()):
+    #                     bidx = (9 * (jidx - 1)) + mi
+    #                     if bidx < 207:
+    #                         cmds.setAttr('%s.Pose%03d' % (self.blendShape, bidx), rot_element * 1)
+    #                         cmds.setKeyframe('%s.Pose%03d' % (self.blendShape, bidx), breakdown=False, controlPoints=False, shape=False)
+    #     self.final_frame = num_frames
+    #     cmds.autoKeyframe(state=autokey_state)
+
+    #     if self.config["export_log"]:
+    #         pose_tag = os.path.basename(self.pose_file).split(".")[0] + "_{}".format(num_frames)
+    #         smpl_tag = os.path.basename(self.body_file).split(".")[0]
+    #         save_fn = os.path.join(self.config["export_folder"], pose_tag + "_" + smpl_tag + '_animated.fbx')
+    #         if not os.path.exists(os.path.dirname(save_fn)):
+    #             os.makedirs(os.path.dirname(save_fn))
+    #         self.export_fbx(save_fn)
+
+    #     return True
+
 
     def extend_motion(self, autokey=True, time_stamp=[-150, -200]):
         # add t pose
@@ -410,6 +496,31 @@ class SmplBody(object):
         # cmds.select(selected)
         # pm.mel.FBXExport(f=fbxfile, exportSelected=True)
 
+
+        # < HJP
+        selected = [obj for obj in cmds.ls() if obj not in self.before_objs]
+        
+        print("LEN SELECTED: {}".format(len(selected)))
+
+
+        # Ensure we're selecting the full hierarchy
+        for obj in selected:
+            cmds.select(obj, hierarchy=True)
+        
+        # Set FBX export options to include animation and deformers
+        pm.mel.eval('FBXExportAnimationOnly -v false')
+        pm.mel.eval('FBXExportBakeComplexAnimation -v true')
+        pm.mel.eval('FBXExportBakeComplexStart -v 0')
+        pm.mel.eval('FBXExportBakeComplexEnd -v {}'.format(self.final_frame))
+        pm.mel.eval('FBXExportBakeResampleAnimation -v false')
+        pm.mel.eval('FBXExportSkins -v true')
+        pm.mel.eval('FBXExportShapes -v true')
+        
+        # Export the FBX
+        pm.mel.FBXExport(f=fbxfile, s=True)
+        # > HJP
+        return
+
         selected = [obj for obj in cmds.ls() if obj not in self.before_objs]
         cmds.select(selected)
         # fbxfile = r"C:\Users\seaops\Desktop\tttest.fbx"  
@@ -516,8 +627,13 @@ class SmplBody(object):
         # self.body_fSMPL = [ch for ch in children if model_type in ch and 'rig' not in ch][0]
         self.body_rig = [ch for ch in children if model_type in ch and 'rig' in ch][0]
         bodyshape = [ch for ch in cmds.listRelatives(self.body_fSMPL) if model_type + "Shape" in ch][0]
-        blendShape = self._get_associated_deformer(bodyshape, 'blendShape')
-        skeleton = cmds.listConnections(self._get_associated_deformer(bodyshape, 'skinCluster'), type='joint')
+        # blendShape = self._get_associated_deformer(bodyshape, 'blendShape')
+        # skeleton = cmds.listConnections(self._get_associated_deformer(bodyshape, 'skinCluster'), type='joint')
+
+        # HJP
+        blendShape = cmds.listConnections(cmds.listConnections(bodyshape), type="blendShape")[0]
+        skeleton   = cmds.listConnections(cmds.listConnections(bodyshape), type="joint")
+
         self.blendShape, self.skeleton = blendShape, skeleton
         self.bone_prefix, self.model_type = self._setup_jnames(self.skeleton)
         if self.animated:

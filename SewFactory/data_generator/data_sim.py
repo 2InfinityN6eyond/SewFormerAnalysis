@@ -2,7 +2,7 @@
     Run or Resume simulation of a pattern dataset with MayaPy standalone mode
     Note that this module is executed in Maya (or by mayapy) and is Python 2.7 friendly.
 """
-
+from imp import reload
 from __future__ import print_function
 import argparse
 from copy import deepcopy
