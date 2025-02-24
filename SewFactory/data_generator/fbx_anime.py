@@ -61,7 +61,9 @@ if __name__ == '__main__':
 
     # args.base_fbx = "meta_infos/fbx_metas/basicModel_f_lbs_10_207_0_v1.0.2.fbx"
     args.pose_root = "examples/human_poses"
-
+    args.output    = "examples/results"
+    
+    # import ipdb; ipdb.set_trace()
 
     if not os.path.exists(args.animated):
         # generate posed fbxs
